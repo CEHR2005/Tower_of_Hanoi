@@ -21,6 +21,7 @@ for algorithm in ["recursive", "iterative", "bitwise", "formula"]:
     assert run(3, "--algorithm", algorithm, "--all") == expected + "generated=7 total=7 complete=yes\n"
     checksums.append(run(10, "--algorithm", algorithm, "--mode", "quiet", "--all"))
 assert len(set(checksums)) == 1
+assert run(10, "--mode", "quiet", "--all") == checksums[0]
 assert "generated=1000 total=2047 complete=no" in run(11)
 assert "generated=1000000 total=1048575 complete=no" in run(20, "--mode", "quiet")
 assert "generated=0 total=7 complete=no" in run(3, "--limit", 0)

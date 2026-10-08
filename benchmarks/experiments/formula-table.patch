@@ -1,0 +1,19 @@
+diff --git a/include/hanoi/hanoi.hpp b/include/hanoi/hanoi.hpp
+index 579e617..e0cb947 100644
+--- a/include/hanoi/hanoi.hpp
++++ b/include/hanoi/hanoi.hpp
+@@ -34,11 +34,9 @@ inline Move formula_move(unsigned n, Count m) {
+     const unsigned d = k + 1;
+     // Two shifts keep the disk-64 case defined.
+     const unsigned q = static_cast<unsigned>(((m >> 1) >> k) % 3);
+-    const bool forward = ((n + d) & 1U) != 0;
+-    const unsigned from = forward || q == 0 ? q : 3 - q;
+-    unsigned to = from + (forward ? 1U : 2U);
+-    if (to >= 3) to -= 3;
+-    return {d, from, to};
++    constexpr unsigned cycle[2][4] = {{0, 2, 1, 0}, {0, 1, 2, 0}};
++    const auto& pegs = cycle[(n + d) & 1U];
++    return {d, pegs[q], pegs[q + 1]};
+ }
+ inline Move bitwise_move(Count m, const unsigned (&peg)[3]) {
+     const Count previous = m - 1;

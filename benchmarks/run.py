@@ -2,6 +2,7 @@
 """Run each sample in a fresh process; write raw samples and a median table."""
 import argparse
 import csv
+from datetime import datetime, timezone
 import hashlib
 import os
 import platform
@@ -45,7 +46,7 @@ def main():
         writer = csv.writer(file)
         writer.writerow(["repeat", "algorithm", "n", "moves", "seconds", "moves_per_second", "peak_rss_kib", "checksum"])
         writer.writerows(rows)
-    metadata = [platform.platform(), "binary_sha256=" + hashlib.sha256(Path(args.binary).read_bytes()).hexdigest(), "affinity=" + str(sorted(os.sched_getaffinity(0))),
+    metadata = ["timestamp_utc=" + datetime.now(timezone.utc).isoformat(), platform.platform(), "binary_sha256=" + hashlib.sha256(Path(args.binary).read_bytes()).hexdigest(), "affinity=" + str(sorted(os.sched_getaffinity(0))),
                 "command=" + repr(vars(args)), "compiler=" + subprocess.check_output(["c++", "--version"], text=True),
                 "os_release=" + Path("/etc/os-release").read_text(),
                 "cpuinfo=" + next((line for line in Path("/proc/cpuinfo").read_text().splitlines() if line.startswith("model name")), "unknown")]

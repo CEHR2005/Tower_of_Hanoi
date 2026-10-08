@@ -95,6 +95,15 @@ int main() {
                 const unsigned peg[] = {0, n & 1U ? 1U : 2U, n & 1U ? 2U : 1U};
                 CHECK(hanoi::detail::bitwise_move(m, peg) == recursive_at(n, m));
             }
+            const unsigned peg[] = {0, n & 1U ? 1U : 2U, n & 1U ? 2U : 1U};
+            for (unsigned k = 0; k < n; ++k) {
+                const auto middle = hanoi::Count{1} << k;
+                for (auto m : {middle - 1, middle, middle + 1}) {
+                    if (m == 0 || m > total) continue;
+                    CHECK(hanoi::move_at(n, m) == recursive_at(n, m));
+                    CHECK(hanoi::detail::bitwise_move(m, peg) == recursive_at(n, m));
+                }
+            }
             for (auto algorithm : algorithms) {
                 hanoi::Count m = 0;
                 State state(n);

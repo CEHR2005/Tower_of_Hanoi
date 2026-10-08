@@ -1,0 +1,22 @@
+timestamp_utc=2026-10-08T17:05:24.209924+00:00
+Linux-6.8.0-142-generic-x86_64-with-glibc2.36
+binary_sha256=f8eb4394a25c3dc6524a53d94d6e6b1b0bd73b6659d858a182628321647f20bb
+affinity=[0]
+command={'binary': 'build/hanoi_bench', 'output': 'benchmarks/results.csv', 'sizes': [16, 20, 24, 26, 28], 'repeats': 7, 'cpu': 0}
+compiler=c++ (Debian 12.2.0-14+deb12u1) 12.2.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+os_release=PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+
+cpuinfo=model name	: AMD EPYC Processor (with IBPB)

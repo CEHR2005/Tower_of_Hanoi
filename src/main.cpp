@@ -19,7 +19,7 @@ void help() {
     std::cout << "Usage: hanoi N [--count | --mode moves|quiet|ascii|ansi]\n"
                  "             [--algorithm formula|bitwise|iterative|recursive]\n"
                  "             [--limit M | --all] [--delay-ms M]\n"
-                 "N: 0..64. Default: moves, limit 1000; quiet limit 1000000.\n"
+                 "N: 0..64. Default: iterative, moves, limit 1000; quiet limit 1000000.\n"
                  "--limit 0 generates no moves. --all explicitly removes the limit.\n"
                  "--count prints only 2^N-1; generation options cannot be combined with it.\n"
                  "Delay: 0..60000 ms, only for ascii/ansi; ANSI requires a compatible terminal.\n";
@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
         if (raw_n > 64) throw std::invalid_argument("disks must be in [0, 64]");
         const auto n = static_cast<unsigned>(raw_n);
         const auto total = hanoi::move_count(n);
-        auto algorithm = hanoi::Algorithm::formula;
+        auto algorithm = hanoi::Algorithm::iterative;
         std::string_view mode = "moves";
         std::optional<hanoi::Count> limit;
         hanoi::Count delay = 0;
